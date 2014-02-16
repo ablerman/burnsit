@@ -22,24 +22,25 @@ require.config({
         jquery: '../bower_components/jquery/jquery',
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
-        bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap'
+        bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
+        tweenlite: '../bower_components/greensock/src/uncompressed/TweenLite',
+        cssplugin: '../bower_components/greensock/src/uncompressed/plugins/CSSPlugin',
     }
 });
 
 require([
     'backbone',
-    'views/app',
     'models/app',
     'routes/routes'
-], function (Backbone, AppView, RoutesRouter, AppModel) {
+], function (Backbone, AppModel, RoutesRouter) {
     'use strict'
-    var router = new RoutesRouter({pushState:true});
-    
+    var model = new AppModel()
+    var router = new RoutesRouter({'model':model});
     Backbone.history.start();
-    var model = new AppModel();
-    var view = new AppView({
-        'model'   : model
-    });
-    view.render();
-    $('#app').html(view.$el);
+//    var model = new AppModel();
+//    var view = new AppView({
+//        'model'   : model
+//    });
+//    view.render();
+//    $('#app').html(view.$el);
 });
